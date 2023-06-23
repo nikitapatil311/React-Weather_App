@@ -1,6 +1,6 @@
 //import logo from "./logo.svg";
 import "./App.css";
-import { Form } from "./components/addActivityForm";
+import Form from "./components/addActivityForm";
 
 function App() {
   return (
@@ -12,14 +12,14 @@ function App() {
         </p> */}
 
         <Form />
-        <a
+        {/* <a
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
+        </a> */}
       </header>
     </div>
   );
