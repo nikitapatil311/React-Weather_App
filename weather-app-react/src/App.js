@@ -1,6 +1,8 @@
 //import logo from "./logo.svg";
 import "./App.css";
-import Form from "./components/addActivityForm";
+import EntryForm from "./components/List";
+//import Form from "./components/addActivityForm";
+import listActivity from "./components/List";
 
 function App() {
   return (
@@ -11,7 +13,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p> */}
 
-        <Form />
+        <EntryForm onAddEntry={listActivity} />
         {/* <a
           className="App-link"
           href="https://reactjs.org"
