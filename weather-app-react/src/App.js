@@ -1,14 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+//import logo from "./logo.svg";
+import "./App.css";
+import { Form } from "./components/addActivityForm";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
-        </p>
+        </p> */}
+
+        <Form />
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -21,5 +24,15 @@ function App() {
     </div>
   );
 }
+
+// function Form() {
+//   return (
+//     <>
+//       <h1>Add New Activity</h1>
+//       <label id="name">Name</label>
+//       <input type="text" htmlFor="name"></input>
+//     </>
+//   );
+// }
 
 export default App;
