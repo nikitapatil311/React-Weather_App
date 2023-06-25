@@ -3,13 +3,14 @@ export default function EntryForm({ onAddActivity }) {
     // console.log("submitted form");
     e.preventDefault();
 
-    // const inputValue = e.target.inputName.value;
+    //  const inputValue = e.target.inputName.value;
     // console.log(inputValue);
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     onAddActivity(data);
     e.target.reset();
+    e.target.elements.inputName.focus();
   }
 
   return (
