@@ -1,10 +1,31 @@
-//import logo from "./logo.svg";
+
+import React, { useEffect } from "react";
 import "./App.css";
-import EntryForm from "./components/List";
-//import Form from "./components/addActivityForm";
-import listActivity from "./components/List";
+import EntryForm from "./components/EntryForm";
+// import listActivity from "./components/EntryForm";
+import useLocalStorageState from "use-local-storage-state";
+import List from "./components/List";
+import { uid } from "uid";
 
 function App() {
+  const [activities, setActivities] = useLocalStorageState("activities", {
+    defaultValue: [
+      { id: "Xssdke", name: "Start Project Four" },
+      { id: "eee345", name: "Love Someone Today" },
+    ],
+  });
+  
+  const addActivity = (activity) => {
+    const newActivity = { id: uid(), ...activity };
+    setActivities([...activities, newActivity]);
+  };
+
+
+  useEffect(() => {
+    setActivities([]);
+  }, []);
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -13,7 +34,9 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p> */}
 
-        <EntryForm onAddEntry={listActivity} />
+  <List activities={activities} />
+
+  <EntryForm handleAddActivity={addActivity} />
         {/* <a
           className="App-link"
           href="https://reactjs.org"
@@ -22,6 +45,8 @@ function App() {
         >
           Learn React
         </a> */}
+
+
       </header>
     </div>
   );
