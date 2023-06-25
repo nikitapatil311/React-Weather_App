@@ -1,10 +1,32 @@
 //import logo from "./logo.svg";
 import "./App.css";
-import EntryForm from "./components/List";
+import EntryForm from "./components/EntryForm";
 //import Form from "./components/addActivityForm";
-import listActivity from "./components/List";
+//import { useState } from "react";
+import useLocalStorage from "use-local-storage-state";
+import List from "./components/List";
+//import EntriesSession from "./components/EntriesSession";
+import { uid } from "uid";
+import { useEffect } from "react";
+
+const isGoodWeather = true;
 
 function App() {
+  const [activities, setActivities] = useLocalStorage("entries", {
+    default: [{ isChecked: true, name: "hi" }],
+  });
+
+  //console.log(activities);
+
+  function handleAddActivity(activity) {
+    const newActivity = { id: uid(), ...activity };
+    setActivities([...activities, newActivity]);
+  }
+
+  useEffect(() => {
+    setActivities([]);
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -12,8 +34,9 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p> */}
+        <List activities={activities} />
 
-        <EntryForm onAddEntry={listActivity} />
+        <EntryForm onAddActivity={handleAddActivity} />
         {/* <a
           className="App-link"
           href="https://reactjs.org"
@@ -26,15 +49,5 @@ function App() {
     </div>
   );
 }
-
-// function Form() {
-//   return (
-//     <>
-//       <h1>Add New Activity</h1>
-//       <label id="name">Name</label>
-//       <input type="text" htmlFor="name"></input>
-//     </>
-//   );
-// }
 
 export default App;
