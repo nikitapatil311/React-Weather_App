@@ -10,10 +10,20 @@ import { uid } from "uid";
 function App() {
   const [activities, setActivities] = useLocalStorageState("activities", {
     defaultValue: [
-      { id: "Xssdke", name: "Start Project Four" },
-      { id: "eee345", name: "Love Someone Today" },
+      { id: "Xssdke", name: "Start Project Four", isForGoodWeather: false  },
+      { id: "eee345", name: "Love Someone Today" , isForGoodWeather: true },
     ],
   });
+
+  useEffect(() => {
+    setActivities([]);
+  }, []);
+
+
+ 
+  const isGoodWeather = true;
+ 
+
   
   const addActivity = (activity) => {
     const newActivity = { id: uid(), ...activity };
@@ -21,9 +31,14 @@ function App() {
   };
 
 
-  useEffect(() => {
-    setActivities([]);
-  }, []);
+
+
+
+// Filter activities based on weather condition
+const filteredActivities = activities.filter(
+  (activity) => activity.isForGoodWeather === isGoodWeather
+);
+
 
 
   return (
@@ -34,9 +49,10 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p> */}
 
-  <List activities={activities} />
+  <List activities={filteredActivities} />
 
-  <EntryForm handleAddActivity={addActivity} />
+  <EntryForm handleAddActivity={addActivity}
+   />
         {/* <a
           className="App-link"
           href="https://reactjs.org"

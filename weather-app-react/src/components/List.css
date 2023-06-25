@@ -1,7 +1,15 @@
-.list {
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .list {
     list-style-type: none;
     margin: 0;
     padding: 0;
+   
+    height: 10vh; /* Set the height to 10% of the viewport height */
   }
   
   .list__item {
@@ -9,7 +17,7 @@
     color: yellowgreen;
     background-color: black;
     margin-bottom: 0.25rem;
-    
+    width: 50%; /* Set the width to 50% of the parent container */
+    margin: 0 25%; /* Add 25% margin on the left and right */
   }
   
-
