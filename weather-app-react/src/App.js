@@ -8,6 +8,9 @@ import List from "./components/List";
 import { uid } from "uid";
 
 function App() {
+
+  
+  // Use local storage to update activities
   const [activities, setActivities] = useLocalStorageState("activities", {
     defaultValue: [
       { id: "Xssdke", name: "Start Project Four", isForGoodWeather: false  },
@@ -15,13 +18,57 @@ function App() {
     ],
   });
 
+
+  // Use local storage to get weather from URL and update
+ const [weather, setWeather] = useLocalStorageState("weather", {
+    defaultValue: null,
+  });
+
+
+const url =  "https://example-apis.vercel.app/api/weather"
   useEffect(() => {
-    setActivities([]);
-  }, []);
+        // Clear stored activities on refresh
+        setActivities([]);
+
+   try {
+async function fetchWeather(){
+const response = await fetch(url)
+const data = await response.json()
+// console.log(data)
+
+// update the weather data 
+setWeather(data)
+}
+
+// set and clear the interval to fetch the data after 3 secs
+
+fetchWeather();
+const timer = setInterval(() => {
+  fetchWeather();
+}, 3000);
+
+return () => {
+  clearInterval(timer);
+};
+} 
 
 
- 
-  const isGoodWeather = true;
+
+// catch fetching data errors
+catch (error) {
+  console.error(error);
+}
+}, 
+
+
+// Update the weather
+
+[setWeather]);
+
+
+
+
+//  const isGoodWeather = true;
  
 
   
@@ -36,20 +83,28 @@ function App() {
 
 // Filter activities based on weather condition
 const filteredActivities = activities.filter(
-  (activity) => activity.isForGoodWeather === isGoodWeather
+  (activity) => activity.isForGoodWeather === 
+    weather.isGoodWeather
 );
 
 
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header >
         {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p> */}
-
-  <List activities={filteredActivities} />
+    {weather && (
+          <h1 className="App_head">
+            <span>{weather.condition}</span>
+            <span>{weather.temperature} °C</span>
+          </h1>
+        )}
+  <List activities={filteredActivities}
+   isGoodWeather={weather.isGoodWeather}
+   />
 
   <EntryForm handleAddActivity={addActivity}
    />
