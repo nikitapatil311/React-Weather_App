@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: blanchedalmond;
+  justify-content: center;
 }
 
 code {
@@ -26,9 +27,9 @@ code {
   text-align: center;
   margin: 40px;
   padding-top: 60px;
-  color: lightskyblue;
+  color: darkblue;
   font-family: cursive;
-  font-size: 40px;
+  font-size: 30px;
   border-radius: 20px;
   border: 6px solid gainsboro;
 }
@@ -43,10 +44,18 @@ code {
 }
 
 .deleteButton {
-  height: 20px;
-  color: darkviolet;
+  height: 40px;
+  width: 70px;
+  color: rgb(0, 0, 0);
+  background-color: aliceblue;
   border: 3px solid;
   border-radius: 8px;
+}
+
+.deleteButton:hover {
+  font-size: 20px;
+  background-color: black;
+  color: aliceblue;
 }
 
 .activityList {
@@ -79,7 +88,33 @@ code {
   height: 80px;
   width: 30%;
   border-radius: 20px;
-  color: cadetblue;
+  color: darkblue;
   font-size: 35px;
-  background-color: ghostwhite;
+  background-color: darkgray;
+}
+
+.nameDiv {
+  margin-bottom: 1rem;
+}
+.dropdown {
+  font-size: 30px;
+  color: darkblue;
+  margin-bottom: 8%;
+}
+
+#continent {
+  height: 40px;
+  width: 200px;
+  font-family: fantasy;
+  font-weight: bold;
+  color: darkblue;
+  border-radius: 20px;
+  background-color: azure;
+}
+
+.welcome-message {
+  color: darkblue;
+  font-size: 35px;
+  background-color: darkgray;
+  border-radius: 100px;
 }
