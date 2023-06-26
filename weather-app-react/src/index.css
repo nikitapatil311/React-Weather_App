@@ -1,11 +1,87 @@
 body {
   margin: 0;
-  font-family: 'Clash Display', cursive, sans-serif;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: blanchedalmond;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.weather {
+  font-size: 55px;
+  font-weight: 800;
+  font-family: sans-serif;
+  display: inline;
+}
+
+.goodOrBad {
+  background-color: darkgray;
+  height: 100px;
+  text-align: center;
+  margin: 40px;
+  padding-top: 60px;
+  color: lightskyblue;
+  font-family: cursive;
+  font-size: 40px;
+  border-radius: 20px;
+  border: 6px solid gainsboro;
+}
+
+.list__item {
+  font-size: 25px;
+  font-family: cursive;
+  gap: 80px;
+  list-style: none;
+  display: flex;
+  width: 20%;
+}
+
+.deleteButton {
+  height: 20px;
+  color: darkviolet;
+  border: 3px solid;
+  border-radius: 8px;
+}
+
+.activityList {
+  width: 20%;
+}
+
+.nameInput {
+  height: 40px;
+  width: 50%;
+  border-radius: 20px;
+}
+
+#name {
+  font-size: 25px;
+  font-style: oblique;
+  font-family: cursive;
+}
+
+#checkBox {
+  font-size: 35px;
+  font-weight: 200;
+}
+
+.check {
+  height: 40px;
+  width: 50px;
+}
+
+.submitButton {
+  height: 80px;
+  width: 30%;
+  border-radius: 20px;
+  color: cadetblue;
+  font-size: 35px;
+  background-color: ghostwhite;
 }

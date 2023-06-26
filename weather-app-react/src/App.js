@@ -2,135 +2,88 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import EntryForm from "./components/EntryForm";
-// import listActivity from "./components/EntryForm";
-import useLocalStorageState from "use-local-storage-state";
+
+//import Form from "./components/addActivityForm";
+import { useState } from "react";
+
+import useLocalStorage from "use-local-storage-state";
 import List from "./components/List";
+//import EntriesSession from "./components/EntriesSession";
 import { uid } from "uid";
+import { useEffect } from "react";
 
 function App() {
-
-  
-  // Use local storage to update activities
-  const [activities, setActivities] = useLocalStorageState("activities", {
-    defaultValue: [
-      { id: "Xssdke", name: "Start Project Four", isForGoodWeather: false  },
-      { id: "eee345", name: "Love Someone Today" , isForGoodWeather: true },
+  const [activities, setActivities] = useLocalStorage("activities", {
+    default: [
+      { isGoodWeatherChecked: true, name: "hi" },
+      { isGoodWeatherChecked: false, name: "hello" },
     ],
   });
 
+  const [weather, setWeather] = useState([]);
 
-  // Use local storage to get weather from URL and update
- const [weather, setWeather] = useLocalStorageState("weather", {
-    defaultValue: null,
-  });
-
-
-const url =  "https://example-apis.vercel.app/api/weather"
   useEffect(() => {
-        // Clear stored activities on refresh
-        setActivities([]);
+    setActivities([]);
+    try {
+      async function weatherFetching() {
+        const response = await fetch(
+          "https://example-apis.vercel.app/api/weather"
+        );
+        const weather = await response.json();
+        console.log(weather);
+        setWeather(weather);
+      }
 
-   try {
-async function fetchWeather(){
-const response = await fetch(url)
-const data = await response.json()
-// console.log(data)
+      weatherFetching();
+      const timer = setInterval(() => {
+        weatherFetching();
+      }, 5000);
 
-// update the weather data 
-setWeather(data)
-}
+      return () => {
+        clearInterval(timer);
+      };
+    } catch (error) {
+      console.log(error);
+    }
 
-// set and clear the interval to fetch the data after 3 secs
+    // weatherFetching();
+  }, [setWeather]);
 
-fetchWeather();
-const timer = setInterval(() => {
-  fetchWeather();
-}, 3000);
-
-return () => {
-  clearInterval(timer);
-};
-} 
-
-
-
-// catch fetching data errors
-catch (error) {
-  console.error(error);
-}
-}, 
-
-
-// Update the weather
-
-[setWeather]);
-
-
-
-
-//  const isGoodWeather = true;
- 
-
-  
-  const addActivity = (activity) => {
+  function handleAddActivity(activity) {
     const newActivity = { id: uid(), ...activity };
-    setActivities([...activities, newActivity]);
-  };
 
+    setActivities([...activities, { id: uid(), ...newActivity }]);
+  }
 
+  function handleDeleteActivity(deleteActivity) {
+    console.log("clicked delete button");
+    setActivities(activities.filter((activity) => activity !== deleteActivity));
+    console.log(deleteActivity);
+  }
 
-
-
-// Filter activities based on weather condition
-const filteredActivities = activities.filter(
-  (activity) => activity.isForGoodWeather === 
-    weather.isGoodWeather
-);
-
-
+  const filterActivities = activities.filter(
+    (activity) => activity.checkBoxName === weather.isGoodWeather
+  );
 
   return (
     <div className="App">
-      <header >
-        {/* <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p> */}
-    {weather && (
-          <h1 className="App_head">
-            <span>{weather.condition}</span>
-            <span>{weather.temperature} °C</span>
-          </h1>
-        )}
-  <List activities={filteredActivities}
-   isGoodWeather={weather.isGoodWeather}
-   />
-
-  <EntryForm handleAddActivity={addActivity}
-   />
-        {/* <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
-
+      <header className="App-header">
+        <div>
+          <span className="weather">
+            {" "}
+            {weather.condition} {weather.temperature}°C{" "}
+          </span>
+        </div>{" "}
+        <List
+          activities={filterActivities}
+          onDeleteActivity={handleDeleteActivity}
+          isGoodWeather={weather.isGoodWeather}
+        />
+        <EntryForm onAddActivity={handleAddActivity} />
 
       </header>
     </div>
   );
 }
-
-// function Form() {
-//   return (
-//     <>
-//       <h1>Add New Activity</h1>
-//       <label id="name">Name</label>
-//       <input type="text" htmlFor="name"></input>
-//     </>
-//   );
-// }
 
 export default App;
