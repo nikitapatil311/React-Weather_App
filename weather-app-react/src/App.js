@@ -13,21 +13,28 @@ import { uid } from "uid";
 import { useEffect } from "react";
 
 function App() {
-  const [activities, setActivities] = useLocalStorage("activities", {
-    default: [
-      { isGoodWeatherChecked: true, name: "hi" },
-      { isGoodWeatherChecked: false, name: "hello" },
-    ],
-  });
+  const [activities, setActivities] = useLocalStorage(
+    "activities",
+    " "
+    //  {
+    //   default: [
+    //     { isGoodWeatherChecked: true, name: "hi" },
+    //     { isGoodWeatherChecked: false, name: "hello" },
+    //   ],
+    // }
+  );
 
   const [weather, setWeather] = useState([]);
+
+  const [continent, setContinent] = useState("");
+  const [welcomeMessage, setWelcomeMessage] = useState("");
 
   useEffect(() => {
     setActivities([]);
     try {
       async function weatherFetching() {
         const response = await fetch(
-          "https://example-apis.vercel.app/api/weather"
+          `https://example-apis.vercel.app/api/weather/${continent}`
         );
         const weather = await response.json();
         console.log(weather);
@@ -47,12 +54,15 @@ function App() {
     }
 
     // weatherFetching();
-  }, [setWeather]);
+  }, [setWeather, continent]);
 
-  function handleAddActivity(activity) {
+  function handleAddActivity(activity, continent) {
     const newActivity = { id: uid(), ...activity };
 
     setActivities([...activities, { id: uid(), ...newActivity }]);
+
+    setContinent(continent);
+    setWelcomeMessage(`Welcome to ${continent}!`);
   }
 
   function handleDeleteActivity(deleteActivity) {
@@ -68,6 +78,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        {welcomeMessage && (
+          <h2 className="welcome-message">{welcomeMessage}</h2>
+        )}
         <div>
           <span className="weather">
             {" "}
