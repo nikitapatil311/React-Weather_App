@@ -22,15 +22,29 @@ function App() {
 
   useEffect(() => {
     setActivities([]);
-    async function weatherFetching() {
-      const response = await fetch(
-        "https://example-apis.vercel.app/api/weather"
-      );
-      const weather = await response.json();
-      console.log(weather);
-      setWeather(weather);
+    try {
+      async function weatherFetching() {
+        const response = await fetch(
+          "https://example-apis.vercel.app/api/weather"
+        );
+        const weather = await response.json();
+        console.log(weather);
+        setWeather(weather);
+      }
+
+      weatherFetching();
+      const timer = setInterval(() => {
+        weatherFetching();
+      }, 5000);
+
+      return () => {
+        clearInterval(timer);
+      };
+    } catch (error) {
+      console.log(error);
     }
-    weatherFetching();
+
+    // weatherFetching();
   }, [setWeather]);
 
   function handleAddActivity(activity) {
@@ -46,7 +60,7 @@ function App() {
   }
 
   const filterActivities = activities.filter(
-    (activity) => activity.isGoodWeatherChecked === weather.isGoodWeather
+    (activity) => activity.checkBoxName === weather.isGoodWeather
   );
 
   return (
@@ -59,7 +73,7 @@ function App() {
           </span>
         </div>{" "}
         <List
-          activities={activities}
+          activities={filterActivities}
           onDeleteActivity={handleDeleteActivity}
           isGoodWeather={weather.isGoodWeather}
         />

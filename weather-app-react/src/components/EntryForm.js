@@ -8,7 +8,13 @@ export default function EntryForm({ onAddActivity }) {
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
+
+    const checkBoxValue = e.target.checkBoxName.checked;
+    data.checkBoxName = checkBoxValue;
+    console.log(checkBoxValue);
+
     onAddActivity(data);
+
     e.target.reset();
     e.target.elements.inputName.focus();
   }
@@ -26,7 +32,12 @@ export default function EntryForm({ onAddActivity }) {
         ></input>
         <br />
         <label id="checkBox">Good-Weather activity</label>
-        <input type="checkbox" className="check"></input>
+        <input
+          type="checkbox"
+          className="check"
+          id="checkBoxInput"
+          name="checkBoxName"
+        ></input>
         <br />
         <button type="submit" className="submitButton">
           Submit
