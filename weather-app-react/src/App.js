@@ -53,10 +53,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          <span>
+          <span className="weather">
             {" "}
-            {weather.condition}
-            {weather.temperature} °C{" "}
+            {weather.condition} {weather.temperature}°C{" "}
           </span>
         </div>{" "}
         <List

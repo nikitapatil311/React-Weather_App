@@ -18,12 +18,19 @@ export default function EntryForm({ onAddActivity }) {
       <form onSubmit={handleSubmit}>
         <h1>Add New Activity</h1>
         <label id="name">Name: </label>
-        <input type="text" htmlFor="name" name="inputName"></input>
+        <input
+          type="text"
+          htmlFor="name"
+          class="nameInput"
+          name="inputName"
+        ></input>
         <br />
         <label id="checkBox">Good-Weather activity</label>
-        <input type="checkbox"></input>
+        <input type="checkbox" className="check"></input>
         <br />
-        <button type="submit">Submit</button>
+        <button type="submit" className="submitButton">
+          Submit
+        </button>
       </form>
     </>
   );
