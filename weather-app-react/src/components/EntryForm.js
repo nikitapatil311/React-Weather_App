@@ -1,3 +1,4 @@
+
 export default function EntryForm({ onAddActivity }) {
   function handleSubmit(e) {
     // console.log("submitted form");
@@ -44,5 +45,6 @@ export default function EntryForm({ onAddActivity }) {
         </button>
       </form>
     </>
+
   );
 }

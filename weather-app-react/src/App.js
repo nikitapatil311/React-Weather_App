@@ -1,6 +1,8 @@
-//import logo from "./logo.svg";
+
+import React, { useEffect } from "react";
 import "./App.css";
 import EntryForm from "./components/EntryForm";
+
 //import Form from "./components/addActivityForm";
 import { useState } from "react";
 
@@ -78,6 +80,7 @@ function App() {
           isGoodWeather={weather.isGoodWeather}
         />
         <EntryForm onAddActivity={handleAddActivity} />
+
       </header>
     </div>
   );

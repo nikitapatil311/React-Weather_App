@@ -1,11 +1,14 @@
+
 export default function List({ activities, onDeleteActivity, isGoodWeather }) {
   return (
     <div>
       <h2 className="goodOrBad">
+
         {isGoodWeather
           ? "the weather is AWESOME 😀! Go outside and:"
           : "bad 😬 weather outside! Here's what you can do"}
       </h2>
+
 
       <ul className="activityList">
         {activities.map((activity) => (
@@ -19,8 +22,12 @@ export default function List({ activities, onDeleteActivity, isGoodWeather }) {
               ✕
             </button>
           </li>
+
         ))}
       </ul>
     </div>
   );
 }
+
+
+
