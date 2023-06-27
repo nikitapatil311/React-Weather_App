@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: blanchedalmond;
+  background-color: #274048;
   justify-content: center;
 }
 
@@ -19,6 +19,7 @@ code {
   font-weight: 800;
   font-family: sans-serif;
   display: inline;
+  color: antiquewhite;
 }
 
 .goodOrBad {
@@ -33,6 +34,9 @@ code {
   border-radius: 20px;
   border: 6px solid gainsboro;
 }
+.formh1 {
+  color: antiquewhite;
+}
 
 .list__item {
   font-size: 25px;
@@ -41,6 +45,7 @@ code {
   list-style: none;
   display: flex;
   width: 20%;
+  color: antiquewhite;
 }
 
 .deleteButton {
@@ -72,11 +77,13 @@ code {
   font-size: 25px;
   font-style: oblique;
   font-family: cursive;
+  color: antiquewhite;
 }
 
 #checkBox {
   font-size: 35px;
   font-weight: 200;
+  color: antiquewhite;
 }
 
 .check {
@@ -94,12 +101,13 @@ code {
 }
 
 .nameDiv {
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 .dropdown {
   font-size: 30px;
   color: darkblue;
   margin-bottom: 8%;
+  color: antiquewhite;
 }
 
 #continent {
