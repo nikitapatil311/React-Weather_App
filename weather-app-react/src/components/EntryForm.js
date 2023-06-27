@@ -31,7 +31,7 @@ export default function EntryForm({ onAddActivity }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h1>Add New Activity</h1>
+        <h1 className="formh1">Add New Activity</h1>
         <div className="nameDiv">
           <label id="name">Name: </label>
           <input

@@ -30,7 +30,7 @@ function App() {
   const [welcomeMessage, setWelcomeMessage] = useState("");
 
   useEffect(() => {
-    setActivities([]);
+    // setActivities([]);
     try {
       async function weatherFetching() {
         const response = await fetch(
@@ -54,7 +54,11 @@ function App() {
     }
 
     // weatherFetching();
-  }, [setWeather, continent]);
+  }, [
+    setWeather,
+    continent,
+    `https://example-apis.vercel.app/api/weather/${continent}`,
+  ]);
 
   function handleAddActivity(activity, continent) {
     const newActivity = { id: uid(), ...activity };
@@ -77,7 +81,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className={`${continent}`}>
         {welcomeMessage && (
           <h2 className="welcome-message">{welcomeMessage}</h2>
         )}
